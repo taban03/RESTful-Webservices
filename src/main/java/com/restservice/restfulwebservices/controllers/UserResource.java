@@ -22,12 +22,12 @@ public class UserResource {
     @Autowired
     private UserDaoService service;
 
-    @GetMapping("/users")
+    @GetMapping("/api/v1/users")
     public List<User> retrieveAllUsers() {
         return service.findAll();
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/api/v1/users/{id}")
     public Resource<User> retrieveUser(@PathVariable int id) {
         User user = service.findOne(id);
         if (user == null) {
@@ -43,7 +43,7 @@ public class UserResource {
     }
 
 
-    @PostMapping("/users")
+    @PostMapping("/api/v1/users")
     public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
         User savedUser = service.save(user);
 
@@ -55,7 +55,7 @@ public class UserResource {
         return ResponseEntity.created(location).build();
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/api/v1/users/{id}")
     public void deleteUser(@PathVariable int id) {
         User user = service.deleteById(id);
 

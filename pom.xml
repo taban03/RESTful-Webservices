@@ -60,7 +60,18 @@
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-xml</artifactId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
+			<version>2.10.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.10.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.netflix.eureka</groupId>
+			<artifactId>eureka-client</artifactId>
+			<version>1.8.6</version>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -71,6 +82,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.ca.mfaas.sdk</groupId>
+			<artifactId>mfaas-integration-enabler-java</artifactId>
+			<version>1.1.12</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ca.mfaas.sdk</groupId>
+			<artifactId>mfaas-common-service-core</artifactId>
+			<version>1.1.12</version>
 		</dependency>
 	</dependencies>
 
@@ -96,6 +117,19 @@
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
 			<url>https://repo.spring.io/milestone</url>
+		</repository>
+<!--		<repository>-->
+<!--			<id>example-repo</id>-->
+<!--			<name>Example Repository</name>-->
+<!--			<url>/Users/at670475/.m2/repository</url>-->
+<!--		</repository>-->
+		<repository>
+			<id>libs-release</id>
+			<name>libs-release</name>
+			<url>https://gizaartifactory.jfrog.io/gizaartifactory/libs-release</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 	<pluginRepositories>

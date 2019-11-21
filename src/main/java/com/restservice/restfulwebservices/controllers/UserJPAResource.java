@@ -28,12 +28,12 @@ public class UserJPAResource {
     @Autowired
     private PostRepository postRepository;
 
-    @GetMapping("/jpa/users")
+    @GetMapping("/api/v1/jpa/users")
     public List<User> retrieveAllUsers() {
         return userRepository.findAll();
     }
 
-    @GetMapping("/jpa/users/{id}")
+    @GetMapping("/api/v1/jpa/users/{id}")
     public Resource<User> retrieveUser(@PathVariable int id) {
         Optional<User> user = userRepository.findById(id);
         if (!user.isPresent()) {
@@ -48,7 +48,7 @@ public class UserJPAResource {
         return resource;
     }
 
-    @GetMapping("/jpa/users/{id}/posts")
+    @GetMapping("/api/v1/jpa/users/{id}/posts")
     public List<Post> retrieveAllUserPosts(@PathVariable int id) {
         Optional<User> userOptional = userRepository.findById(id);
         if (!userOptional.isPresent()) {
@@ -57,7 +57,7 @@ public class UserJPAResource {
         return userOptional.get().getPosts();
     }
 
-    @PostMapping("/jpa/users")
+    @PostMapping("/api/v1/jpa/users")
     public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
         User savedUser = userRepository.save(user);
 
@@ -69,7 +69,7 @@ public class UserJPAResource {
         return ResponseEntity.created(location).build();
     }
 
-    @PostMapping("/jpa/users/{id}/posts")
+    @PostMapping("/api/v1/jpa/users/{id}/posts")
     public ResponseEntity<Object> createPost(@PathVariable int id, @RequestBody Post post) {
         Optional<User> userOptional = userRepository.findById(id);
         if (!userOptional.isPresent()) {
@@ -87,7 +87,7 @@ public class UserJPAResource {
         return ResponseEntity.created(location).build();
     }
 
-    @DeleteMapping("/jpa/users/{id}")
+    @DeleteMapping("/api/v1/jpa/users/{id}")
     public void deleteUser(@PathVariable int id) {
         userRepository.deleteById(id);
     }

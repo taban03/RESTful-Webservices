@@ -18,7 +18,7 @@ public class HelloworldController {
      * Print hello world message
      * @return message
      */
-    @GetMapping(path = "/hello-world")
+    @GetMapping(path = "/api/v1/hello-world")
     public String helloWorld() {
         return "Hello World";
     }

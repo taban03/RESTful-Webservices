@@ -16,46 +16,141 @@
 #        exposure:
 #          include: *
 
-serviceId: sampleservice
-title: Hello API ML
-description: Sample API ML REST API Service
-baseUrl: http://localhost:8081/sampleservice
-serviceIpAddress: 127.0.0.1
-homePageRelativeUrl:
-statusPageRelativeUrl: /application/info
-healthCheckRelativeUrl: /application/health
-
-discoveryServiceUrls:
-  - https://localhost:10011/eureka
-
-routes:
-  - gatewayUrl: api/v1
-    serviceUrl: /sampleservice/api/v1
-
-apiInfo:
-  - apiId: org.zowe.sampleservice
-    version: v1
-    gatewayUrl: api/v1
-    swaggerUrl: http://localhost:8081/sampleservice/api-doc
-
-catalog:
-  tile:
-    id: sampleservice
-    title: RESTFUL WEBSERVICES
-    description: Proof of Concept application to demonstrate exposing a sample REST API in the API ML
-    version: 1.0.0
-
-ssl:
-  verifySslCertificatesOfServices: true
-  protocol: TLSv1.2
-#  ciphers: TLS_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_EMPTY_RENEGOTIATION_INFO_SCSV
-  keyAlias: localhost
-  keyPassword: password
-  keyStore: /Users/at670475/IntelliJProjects/zowe_repo/api-layer/keystore/localhost/localhost.keystore.p12
-  keyStoreType: PKCS12
-  keyStorePassword: password
-  trustStore: /Users/at670475/IntelliJProjects/zowe_repo/api-layer/keystore/localhost/localhost.truststore.p12
-  trustStoreType: PKCS12
-  trustStorePassword: password
+#serviceId: sampleservice
+#title: Hello API ML
+#description: Sample API ML REST API Service
+#baseUrl: http://localhost:8081/sampleservice
+#serviceIpAddress: 127.0.0.1
+#homePageRelativeUrl:
+#statusPageRelativeUrl: /application/info
+#healthCheckRelativeUrl: /application/health
+#
+#discoveryServiceUrls:
+#  - https://localhost:10011/eureka
+#
+#routes:
+#  - gatewayUrl: api/v1
+#    serviceUrl: /sampleservice/api/v1
+#
+#apiInfo:
+#  - apiId: org.zowe.sampleservice
+#    version: v1
+#    gatewayUrl: api/v1
+#    swaggerUrl: http://localhost:8081/sampleservice/api-doc
+#
+#catalog:
+#  tile:
+#    id: sampleservice
+#    title: RESTFUL WEBSERVICES
+#    description: Proof of Concept application to demonstrate exposing a sample REST API in the API ML
+#    version: 1.0.0
+#
+#ssl:
+#  verifySslCertificatesOfServices: true
+#  protocol: TLSv1.2
+##  ciphers: TLS_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_EMPTY_RENEGOTIATION_INFO_SCSV
+#  keyAlias: localhost
+#  keyPassword: password
+#  keyStore: /Users/at670475/IntelliJProjects/zowe_repo/api-layer/keystore/localhost/localhost.keystore.p12
+#  keyStoreType: PKCS12
+#  keyStorePassword: password
+#  trustStore: /Users/at670475/IntelliJProjects/zowe_repo/api-layer/keystore/localhost/localhost.truststore.p12
+#  trustStoreType: PKCS12
+#  trustStorePassword: password
 #server:
 #  port: 8081
+logging:
+  level:
+    ROOT: INFO
+
+spring:
+  application:
+    name: sampleservice
+
+
+apiml:
+  enabled: false
+  service:
+    serviceId: ${spring.application.name}
+    title: Sample REST service
+    description:  Sample REST API services to demonstrate Spring Integration Enabler
+
+    scheme: https
+    hostname: localhost  # Hostname that is advertised in Eureka. Default is valid only for localhost
+    port: 8081  # Default port name for discoverable-clinet service
+    serviceIpAddress: 127.0.0.1
+    baseUrl: ${apiml.service.scheme}://${apiml.service.hostname}:${apiml.service.port}
+
+    homePageRelativeUrl: ${server.servlet.contextPath}
+    statusPageRelativeUrl: ${server.servlet.contextPath}/application/info
+    healthCheckRelativeUrl: ${server.servlet.contextPath}/application/health
+
+    contextPath: ${server.servlet.contextPath}
+
+    discoveryServiceUrls: https://localhost:10011/eureka
+
+    routes:
+      -   gateway-url: "ui/v1"
+          service-url:  ${apiml.service.contextPath}
+      -   gateway-url: "api/v1"
+          service-url:  ${apiml.service.contextPath}/api/v1
+    apiInfo:
+        - apiId: com.restservice.restfulwebservices.configuration
+          version: 1.0.0
+          gatewayUrl: api/v1
+          swaggerUrl: ${apiml.service.scheme}://${apiml.service.hostname}:${server.port}${server.servlet.contextPath}/v2/api-docs
+          documentationUrl: https://www.zowe.org
+    catalog:
+      tile:
+        id: cademoapps
+        title: Sample API Mediation Layer Applications
+        description: Applications which demonstrate how to make a service integrated to the API Mediation Layer ecosystem
+        version: 1.0.1
+
+    ssl:
+        verifySslCertificatesOfServices: true
+        protocol: TLSv1.2
+        ciphers: TLS_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_EMPTY_RENEGOTIATION_INFO_SCSV
+        keyAlias: localhost
+        keyPassword: password
+        keyStore: /Users/at670475/IntelliJProjects/zowe_repo/api-layer/keystore/localhost/localhost.keystore.p12
+        keyStoreType: PKCS12
+        keyStorePassword: password
+        trustStore: /Users/at670475/IntelliJProjects/zowe_repo/api-layer/keystore/localhost/localhost.truststore.p12
+        trustStoreType: PKCS12
+        trustStorePassword: password
+
+
+server:
+  address: ${apiml.service.serviceIpAddress}
+  port: 8081
+  servlet:
+    contextPath: /sampleservice
+  ssl:
+    keyAlias: localhost
+    keyPassword: password
+    trustStorePassword: password
+    keyStorePassword: password
+    enabled: false
+    protocol: TLSv1.2
+    enabled-protocols: TLSv1.2
+    ciphers: ${apiml.service.ssl.ciphers}
+    keyStore: /Users/at670475/IntelliJProjects/zowe_repo/api-layer/keystore/localhost/localhost.keystore.p12
+    trustStore: /Users/at670475/IntelliJProjects/zowe_repo/api-layer/keystore/localhost/localhost.truststore.p12
+    keyStoreType: PKCS12
+    trustStoreType: PKCS12
+
+management:
+  endpoints:
+    web:
+      base-path: /application
+      exposure:
+        include: health,info,routes
+  health:
+    defaults:
+      enabled: false
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${apiml.service.discoveryServiceUrls}

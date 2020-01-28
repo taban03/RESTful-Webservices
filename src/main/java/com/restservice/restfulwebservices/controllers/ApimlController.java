@@ -2,6 +2,7 @@ package com.restservice.restfulwebservices.controllers;
 
 import com.ca.mfaas.eurekaservice.model.Health;
 import com.restservice.restfulwebservices.model.EmptyJsonResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,17 +12,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import springfox.documentation.annotations.ApiIgnore;
+import springfox.documentation.spring.web.plugins.Docket;
 
 @Controller
-@ApiIgnore
 @RequestMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
 public class ApimlController {
 
+
 //    customize location for swagger
-    @GetMapping("/api-doc")
-    public String apiDoc() {
-        return "forward:/v2/api-docs";
-    }
+//    @GetMapping("/api-doc")
+//    public String apiDoc() {
+//        return "forward:/v2/api-docs";
+//    }
 
     @GetMapping("/application/health")
     public @ResponseBody Health getHealth() {

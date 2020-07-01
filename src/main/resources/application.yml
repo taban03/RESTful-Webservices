@@ -69,7 +69,7 @@ spring:
 
 
 apiml:
-  enabled: false
+  enabled: true
   service:
     serviceId: ${spring.application.name}
     title: Sample REST service
@@ -131,7 +131,7 @@ server:
     keyPassword: password
     trustStorePassword: password
     keyStorePassword: password
-    enabled: false
+    enabled: true
     protocol: TLSv1.2
     enabled-protocols: TLSv1.2
     ciphers: ${apiml.service.ssl.ciphers}
